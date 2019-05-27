@@ -14,7 +14,7 @@ namespace NBitcoin.Altcoins
 	{
 		public static Bitcoinz Instance { get; } = new Bitcoinz();
 
-		public override string CryptoCode => "LTC";
+		public override string CryptoCode => "BTCZ";
 
 		private Bitcoinz()
 		{
