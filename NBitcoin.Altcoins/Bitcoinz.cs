@@ -10,13 +10,13 @@ using System.Net;
 
 namespace NBitcoin.Altcoins
 {
-	public class Litecoin : NetworkSetBase
+	public class Bitcoinz : NetworkSetBase
 	{
-		public static Litecoin Instance { get; } = new Litecoin();
+		public static Bitcoinz Instance { get; } = new Bitcoinz();
 
 		public override string CryptoCode => "LTC";
 
-		private Litecoin()
+		private Bitcoinz()
 		{
 
 		}
@@ -105,25 +105,25 @@ namespace NBitcoin.Altcoins
 };
 
 #pragma warning disable CS0618 // Type or member is obsolete
-		public class LitecoinConsensusFactory : ConsensusFactory
+		public class BitcoinzConsensusFactory : ConsensusFactory
 		{
-			private LitecoinConsensusFactory()
+			private BitcoinzConsensusFactory()
 			{
 			}
 
-			public static LitecoinConsensusFactory Instance { get; } = new LitecoinConsensusFactory();
+			public static BitcoinzConsensusFactory Instance { get; } = new BitcoinzConsensusFactory();
 
 			public override BlockHeader CreateBlockHeader()
 			{
-				return new LitecoinBlockHeader();
+				return new BitcoinzBlockHeader();
 			}
 			public override Block CreateBlock()
 			{
-				return new LitecoinBlock(new LitecoinBlockHeader());
+				return new BitcoinzBlock(new BitcoinzBlockHeader());
 			}
 		}
 
-		public class LitecoinBlockHeader : BlockHeader
+		public class BitcoinzBlockHeader : BlockHeader
 		{
 			public override uint256 GetPoWHash()
 			{
@@ -133,19 +133,19 @@ namespace NBitcoin.Altcoins
 			}
 		}
 
-		public class LitecoinBlock : Block
+		public class BitcoinzBlock : Block
 		{
-			public LitecoinBlock(LitecoinBlockHeader header) : base(header)
+			public BitcoinzBlock(BitcoinzBlockHeader header) : base(header)
 			{
 
 			}
 			public override ConsensusFactory GetConsensusFactory()
 			{
-				return LitecoinConsensusFactory.Instance;
+				return BitcoinzConsensusFactory.Instance;
 			}
 		}
 
-		public class LitecoinMainnetAddressStringParser : NetworkStringParser
+		public class BitcoinzMainnetAddressStringParser : NetworkStringParser
 		{
 			public override bool TryParse<T>(string str, Network network, out T result)
 			{
@@ -189,7 +189,7 @@ namespace NBitcoin.Altcoins
 
 		protected override void PostInit()
 		{
-			RegisterDefaultCookiePath("Litecoin", new FolderName() { TestnetFolder = "testnet4" });
+			RegisterDefaultCookiePath("Bitcoinz", new FolderName() { TestnetFolder = "testnet4" });
 		}
 
 		protected override NetworkBuilder CreateMainnet()
@@ -210,30 +210,30 @@ namespace NBitcoin.Altcoins
 				RuleChangeActivationThreshold = 6048,
 				MinerConfirmationWindow = 8064,
 				CoinbaseMaturity = 100,
-				LitecoinWorkCalculation = true,
-				ConsensusFactory = LitecoinConsensusFactory.Instance
+				BitcoinzWorkCalculation = true,
+				ConsensusFactory = BitcoinzConsensusFactory.Instance
 			})
 			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 48 })
 			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 50 })
 			.SetBase58Bytes(Base58Type.SECRET_KEY, new byte[] { 176 })
 			.SetBase58Bytes(Base58Type.EXT_PUBLIC_KEY, new byte[] { 0x04, 0x88, 0xB2, 0x1E })
 			.SetBase58Bytes(Base58Type.EXT_SECRET_KEY, new byte[] { 0x04, 0x88, 0xAD, 0xE4 })
-			.SetNetworkStringParser(new LitecoinMainnetAddressStringParser())
+			.SetNetworkStringParser(new BitcoinzMainnetAddressStringParser())
 			.SetBech32(Bech32Type.WITNESS_PUBKEY_ADDRESS, Encoders.Bech32("ltc"))
 			.SetBech32(Bech32Type.WITNESS_SCRIPT_ADDRESS, Encoders.Bech32("ltc"))
 			.SetMagic(0xdbb6c0fb)
-			.SetPort(9333)
-			.SetRPCPort(9332)
-			.SetName("ltc-main")
-			.AddAlias("ltc-mainnet")
-			.AddAlias("litecoin-mainnet")
-			.AddAlias("litecoin-main")
+			.SetPort(1980)
+			.SetRPCPort(1979)
+			.SetName("btcz-main")
+			.AddAlias("btcz-mainnet")
+			.AddAlias("bitcoinz-mainnet")
+			.AddAlias("bitcoinz-main")
 			.AddDNSSeeds(new[]
 			{
-				new DNSSeedData("loshan.co.uk", "seed-a.litecoin.loshan.co.uk"),
+				new DNSSeedData("loshan.co.uk", "seed-a.bitcoinz.loshan.co.uk"),
 				new DNSSeedData("thrasher.io", "dnsseed.thrasher.io"),
-				new DNSSeedData("litecointools.com", "dnsseed.litecointools.com"),
-				new DNSSeedData("litecoinpool.org", "dnsseed.litecoinpool.org"),
+				new DNSSeedData("bitcoinztools.com", "dnsseed.bitcoinztools.com"),
+				new DNSSeedData("bitcoinzpool.org", "dnsseed.bitcoinzpool.org"),
 				new DNSSeedData("koin-project.com", "dnsseed.koin-project.com"),
 			})
 			.AddSeeds(ToSeed(pnSeed6_main))
@@ -258,8 +258,8 @@ namespace NBitcoin.Altcoins
 				RuleChangeActivationThreshold = 1512,
 				MinerConfirmationWindow = 2016,
 				CoinbaseMaturity = 100,
-				LitecoinWorkCalculation = true,
-				ConsensusFactory = LitecoinConsensusFactory.Instance
+				BitcoinzWorkCalculation = true,
+				ConsensusFactory = BitcoinzConsensusFactory.Instance
 			})
 			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 111 })
 			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 58 })
@@ -271,14 +271,14 @@ namespace NBitcoin.Altcoins
 			.SetMagic(0xf1c8d2fd)
 			.SetPort(19335)
 			.SetRPCPort(19332)
-			.SetName("ltc-test")
-			.AddAlias("ltc-testnet")
-			.AddAlias("litecoin-test")
-			.AddAlias("litecoin-testnet")
+			.SetName("btcz-test")
+			.AddAlias("btcz-testnet")
+			.AddAlias("bitcoinz-test")
+			.AddAlias("bitcoinz-testnet")
 			.AddDNSSeeds(new[]
 			{
-				new DNSSeedData("litecointools.com", "testnet-seed.litecointools.com"),
-				new DNSSeedData("loshan.co.uk", "seed-b.litecoin.loshan.co.uk"),
+				new DNSSeedData("bitcoinztools.com", "testnet-seed.bitcoinztools.com"),
+				new DNSSeedData("loshan.co.uk", "seed-b.bitcoinz.loshan.co.uk"),
 				new DNSSeedData("thrasher.io", "dnsseed-testnet.thrasher.io"),
 			})
 			.AddSeeds(ToSeed(pnSeed6_test))
@@ -304,23 +304,23 @@ namespace NBitcoin.Altcoins
 				RuleChangeActivationThreshold = 108,
 				MinerConfirmationWindow = 2016,
 				CoinbaseMaturity = 100,
-				LitecoinWorkCalculation = true,
-				ConsensusFactory = LitecoinConsensusFactory.Instance
+				BitcoinzWorkCalculation = true,
+				ConsensusFactory = BitcoinzConsensusFactory.Instance
 			})
 			.SetBase58Bytes(Base58Type.PUBKEY_ADDRESS, new byte[] { 111 })
 			.SetBase58Bytes(Base58Type.SCRIPT_ADDRESS, new byte[] { 58 })
 			.SetBase58Bytes(Base58Type.SECRET_KEY, new byte[] { 239 })
 			.SetBase58Bytes(Base58Type.EXT_PUBLIC_KEY, new byte[] { 0x04, 0x35, 0x87, 0xCF })
 			.SetBase58Bytes(Base58Type.EXT_SECRET_KEY, new byte[] { 0x04, 0x35, 0x83, 0x94 })
-			.SetBech32(Bech32Type.WITNESS_PUBKEY_ADDRESS, Encoders.Bech32("rltc"))
-			.SetBech32(Bech32Type.WITNESS_SCRIPT_ADDRESS, Encoders.Bech32("rltc"))
+			.SetBech32(Bech32Type.WITNESS_PUBKEY_ADDRESS, Encoders.Bech32("rbtcz"))
+			.SetBech32(Bech32Type.WITNESS_SCRIPT_ADDRESS, Encoders.Bech32("rbtcz"))
 			.SetMagic(0xdab5bffa)
 			.SetPort(19444)
 			.SetRPCPort(19332)
-			.SetName("ltc-reg")
-			.AddAlias("ltc-regtest")
-			.AddAlias("litecoin-reg")
-			.AddAlias("litecoin-regtest")
+			.SetName("btcz-reg")
+			.AddAlias("btcz-regtest")
+			.AddAlias("bitcoinz-reg")
+			.AddAlias("bitcoinz-regtest")
 			.SetGenesis("010000000000000000000000000000000000000000000000000000000000000000000000d9ced4ed1130f7b7faad9be25323ffafa33232a17c3edf6cfd97bee6bafbdd97dae5494dffff7f20000000000101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4804ffff001d0104404e592054696d65732030352f4f63742f32303131205374657665204a6f62732c204170706c65e280997320566973696f6e6172792c2044696573206174203536ffffffff0100f2052a010000004341040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9ac00000000");
 			return builder;
 		}
